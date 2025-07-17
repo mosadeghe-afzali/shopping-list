@@ -10,8 +10,169 @@
 </head>
 
 <body>
-<div class="bg-red-700">hi</div>
+    <svg class="hidden">
+        <symbol id="shopping-cart" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+        </symbol>
+        <symbol id="arrow-left-end-on-rectangle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+        </symbol>
+        <symbol id="close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+            stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+         </symbol>
+         <symbol id="pencil" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+        </symbol>
 
+    </svg>
+
+    <header class="flex items-center w-[90%] h-24 py-5 px-10 bg-gray-100 mx-auto mt-9 rounded-3xl">
+        <div class="flex w-full justify-between items-center">
+            <nav class="flex gap-x-9 items-center">
+                <div>
+                    <img src="">
+                </div>
+                <ul class="flex gap-x-9 text-xl text-gray-800 tracking-tightest">
+                    <li class="font-DanaMedium text-orange-200">
+                        <a>
+                            صفحه اصلی
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            درباره ما
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            تماس با ما
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="flex text-xl text-gray-800 gap-x-10">
+                <div class="flex gap-x-5 items-center">
+                    <div>
+                        <svg class="w-8 h-8">
+                            <use xlink:href="#shopping-cart"></use>
+                        </svg>
+                    </div>
+                </div>
+                <span class="w-px bg-white/20 h-14 "></span>
+                <a href="#" class="flex items-center gap-x-2.5 tracking-tightest">
+                    <svg class="w-8 h-8 rotate-180">
+                        <use xlink:href="#arrow-left-end-on-rectangle"></use>
+                    </svg>
+                    ورود | ثبت نام
+                </a>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="p-15 w-[50%] mx-auto">
+        <div class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl">لیست خرید</h1>
+            <div>
+            <button onclick="showItemPopup()" class="add-item bg-sky-200 w-20 h-8">افزودن</button>
+            </div>
+        </div>
+        <div class=" order-card">
+            <!-- <div class="flex items-center justify-between bg-gray-100 p-5">
+                <div>شناسه</div>
+                <div>جزئیات محصول</div>
+            </div> -->
+     
+        </div>
+    </div>
+
+
+    <div id="insert-item" onclick="hiddenItemPopup(event)"
+        class="bg-[#2121217a] backdrop-blur-[5px] items-center overflow-y-auto justify-center overflow-x-hidden fixed top-0 right-0 z-[1090] p-6 w-full h-modal h-full hidden">
+        <div class="w-full max-w-xl min-[1300px]:h-[auto] h-full">
+            <!-- Modal content -->
+            <div class="bg-white rounded-lg p-[24px] grid gap-[16px]">
+                <div class="flex justify-between items-start rounded-t">
+                    <div class="sm:text-2xl text-xl text-center font-bold text-[#585858]">
+                        فرم ثبت آیتم
+                    </div>
+                    <button onclick="closeItemPopup()" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center">
+                    <svg class="w-8 h-8">
+                        <use xlink:href="#close"></use>
+                    </svg>
+                    </button>
+                </div>
+
+                <div class="pt-[16px]">
+                    <form id="insert-item-form" class="grid grid-cols-1">
+                        <div class="grid  items-center grid-cols-1">
+                            <div class="grid grid-cols-1 gap-x-[16px] gap-y-[20px] self-center w-full">
+
+                                <div class="relative z-0 group grid grid-cols-1">
+                                    <div class="relative z-0 w-full">
+                                        <div class="grid grid-cols-1">
+                                            <input type="text" required name="name" id="name"
+                                                class="px-4 border border-[#E5E5E5] rounded-[10px] block py-[12px] w-full text-sm text-gray-900 bg-transparent appearance-none" />
+
+                                            <label
+                                                class="mx-[30px] text-[#464B51] absolute text-[16px] top-[-11px] z-10 origin-[0] px-2 bg-[#F5F5F5]">
+                                                نام
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="relative z-0 group grid grid-cols-1">
+                                    <div class="relative z-0 w-full">
+                                        <div class="grid grid-cols-1">
+                                            <input type="text" required name="price" id="price"
+                                                class="px-4 border border-[#E5E5E5] rounded-[10px] block py-[12px] w-full text-sm text-gray-900 bg-transparent appearance-none" />
+
+                                            <label
+                                                class="mx-[30px] text-[#464B51] absolute text-[16px] top-[-11px] z-10 origin-[0] px-2 bg-[#F5F5F5]">
+                                                قیمت
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="relative z-0 group grid grid-cols-1">
+                                    <div class="relative z-0 w-full">
+                                        <div class="grid grid-cols-1">
+                                            <textarea type="text" required id="description" name="description"
+                                                class="px-4 border border-[#E5E5E5] rounded-[10px] block py-[12px] w-full text-sm text-gray-900 bg-transparent appearance-none"></textarea>
+                                            <label
+                                                class="mx-[30px] absolute text-[16px] text-[#464B51] top-[-11px] z-10 origin-[0] px-2 bg-[#F5F5F5]">
+                                                توضیحات
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id" id="id">
+
+                                <div class="grid grid-cols-1 items-center justify-between">
+                                    <div class="grid grid-cols-1 items-center justify-between">
+                                        <button onclick="submitItemFrom()" type="button" id="insert_button"
+                                            class="w-full flex items-center justify-center py-[12px] bg-green-400 rounded-[10px] text-[20px] font-bold text-white">
+                                            ثبت
+                                        </button>
+                                    </div>
+                                    <div id="message_form"
+                                        class="relative z-0 group grid grid-cols-1 gap-[16px]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
     <script src="./scripts/main.js""></script>
 </html>

@@ -11,4 +11,18 @@ class ItemController {
 
          return json_encode($output, JSON_UNESCAPED_UNICODE); 
     }
+    
+    public function insert($input) {
+       
+        $data = [
+            "name" => $input['name'],
+            'price' => $input['price'], 
+            'description' => $input['description']
+        ]; 
+      
+        $itemModel = new Item(); 
+        $output = $itemModel->insert($data); 
+ 
+        return json_encode($output, JSON_UNESCAPED_UNICODE); 
+    }
 }
