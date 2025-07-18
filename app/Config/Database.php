@@ -17,6 +17,19 @@ class Database
     private function __construct() {
         try {
             $this->connection = new PDO(
+                "mysql:host=" . $this->dbhost,
+                $this->username,
+                $this->password
+            );
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "CREATE DATABASE IF NOT EXISTS `$this->dbname`";
+            $this->connection->exec($sql); 
+            // echo "Database created successfully<br>";
+        }catch(PDOException $e) {
+            die('create database error: ' . $e->getMessage()); 
+        }
+        try {
+            $this->connection = new PDO(
                 "mysql:host=" . $this->dbhost . ";dbname=" . $this->dbname,
                 $this->username,
                 $this->password
