@@ -74,7 +74,7 @@ class Item extends Model
         $output = [];
         $current_date = date('Y-m-d H:i:s');
 
-        $stmt = $this->db->prepare("UPDATE `items` 
+        $stmt = $this->connect->prepare("UPDATE `items` 
         SET name=:name,price=:price,description=:description,updated_at=:updated_at WHERE id=:id");
 
         $stmt->bindParam('id', $input['id']);
@@ -93,7 +93,7 @@ class Item extends Model
 
         $output['status'] = "success";
         $output['message'] = "با موفقیت انجام شد.";
-        $output['response'] = $this->db->lastInsertId();
+        $output['response'] = $this->connect->lastInsertId();
 
         return $output;
     }
@@ -102,7 +102,7 @@ class Item extends Model
     {
         $output = [];
   
-        $stmt = $this->db->prepare("DELETE FROM `items` WHERE  id = :id");
+        $stmt = $this->connect->prepare("DELETE FROM `items` WHERE  id = :id");
 
         $stmt->bindParam('id', $id);
 
@@ -116,7 +116,7 @@ class Item extends Model
 
         $output['status'] = "success";
         $output['message'] = "با موفقیت انجام شد.";
-        $output['response'] = $this->db->lastInsertId();
+        $output['response'] = $this->connect->lastInsertId();
 
         return $output;
     }

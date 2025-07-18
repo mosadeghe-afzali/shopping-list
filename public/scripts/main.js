@@ -224,6 +224,35 @@ function updateItem() {
         }
     });
 }
+
+function deleteItem(e) {
+    var  id = $(e).data('id'); 
+
+    console.log(e, id)
+     console.log(id); 
+     $.ajax({
+         url: "../routes/index.php?method=deleteItem",
+         type: "POST",
+         dataType: 'json',
+         data: { 
+             "_token": "{{ csrf_token() }}",
+             item_id: id,
+         },
+         success: function (response) {
+             console.log(response); 
+     
+             setTimeout(function () {
+                 location.reload();
+ 
+             }, 800);
+             
+         },
+         error: function (error) {
+             console.log(error, 'err')
+         }
+     });
+ }
+ 
 function checkEmpty($item) {
     if ($item === "" || $item === undefined || $item === null)
         return true;
