@@ -20,13 +20,7 @@ function getItems() {
                             +
                                 "<div class='basis-[40%] '>" 
                                 + "<div class='bg-green-400'>" +
-
-                                    // "<svg class='w-10 h-10 rotate-180'>" + 
-                                    //     "<use xlink:href='#archive-box'></use>" + 
-                                    // "</svg>" 
-                                    "<input type='checkbox' name='items[]' data-id = "
-                                    + value.id + " value=" + value.id + ">"
-                                    
+                                    "<input type='checkbox' name='items[]' data-id = "+ value.id + " value=" + value.id + ">"
                                 + "</div>"
                             + "</div>"
                             + "<div class='basis-[60%] bg-green-200 '>" 
@@ -224,6 +218,42 @@ function updateItem() {
         }
     });
 }
+
+function deleteItem(e) {
+    var  id = $(e).data('id'); 
+
+    console.log(e, id)
+     console.log(id); 
+     $.ajax({
+         url: "../routes/index.php?method=deleteItem",
+         type: "POST",
+         dataType: 'json',
+         data: { 
+             "_token": "{{ csrf_token() }}",
+             item_id: id,
+         },
+         success: function (response) {
+             console.log(response); 
+     
+             setTimeout(function () {
+                 location.reload();
+ 
+             }, 800);
+             
+         },
+         error: function (error) {
+             console.log(error, 'err')
+         }
+     });
+ }
+ 
+ function deleteItems() {
+    var selectedItems = $('input[name="items[]"]:checked').map(function() {
+       deleteItem(this)
+    }).get()
+
+}
+
 function checkEmpty($item) {
     if ($item === "" || $item === undefined || $item === null)
         return true;
