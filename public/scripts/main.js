@@ -95,15 +95,24 @@ function submitItemFrom() {
         return true;
     }
     if (checkEmpty(price)) {
+        console.log(price)
         $('#insert_button').prop('disabled', false);
         $('#message_form').html("قیمت را وارد کنید.");
         return true;
     }
+
+    if(checkNumeric(price)) {
+        $('#insert_button').prop('disabled', false);
+        $('#message_form').html("قیمت را عدد وارد کنید.");
+        return true;
+    }
+    
     if (checkEmpty(description)) {
         $('#insert_button').prop('disabled', false);
         $('#message_form').html("توضیحات را وارد کنید.");
         return true;
     }
+
     console.log(id);
 
     if(id) {
@@ -132,6 +141,11 @@ function insertItem() {
         },
         success: function (response) {
             console.log(response); 
+            if(response.status == 'error') {
+                $('#message_form').html(response.message)
+                $('#insert_button').prop('disabled', false);
+                return
+            }
       
             $('#message_form').html(response.message)
             setTimeout(function () {
@@ -191,7 +205,12 @@ function updateItem() {
         },
         success: function (response) {
             console.log(response); 
-        
+
+            if(response.status == 'error') {
+                $('#message_form').html(response.message)
+                $('#insert_button').prop('disabled', false);
+                return
+            }
             $('#message_form').html(response.message)
             setTimeout(function () {
                 $('#message_form').html("")
@@ -232,7 +251,6 @@ function deleteItem(e) {
          },
          success: function (response) {
              console.log(response); 
-     
              setTimeout(function () {
                  location.reload();
  
@@ -252,8 +270,17 @@ function deleteItem(e) {
 
 }
 
-function checkEmpty($item) {
-    if ($item === "" || $item === undefined || $item === null)
+function checkEmpty(item) {
+    if (item === "" || item === undefined || item === null)
         return true;
     return false;
+}
+
+function checkNumeric(item) {
+    item = parseFloat(item)
+
+    if(typeof(item) != 'number') {
+        return true
+    }
+    return false
 }
