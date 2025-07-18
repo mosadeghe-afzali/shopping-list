@@ -25,4 +25,28 @@ class ItemController {
  
         return json_encode($output, JSON_UNESCAPED_UNICODE); 
     }
+
+    public function delete($input) {
+        $item_id = $input['item_id']; 
+      
+        $itemModel = new Item(); 
+        $result = $itemModel->delete($item_id); 
+
+        return json_encode($result, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function update($input) {
+       
+        $data = [
+            "id" => $input['id'], 
+            "name" => $input['name'],
+            'price' => $input['price'], 
+            'description' => $input['description']
+        ]; 
+
+        $itemModel = new Item(); 
+        $output = $itemModel->update($data); 
+ 
+        return json_encode($output, JSON_UNESCAPED_UNICODE); 
+    }
 }

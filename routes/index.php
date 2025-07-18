@@ -16,7 +16,16 @@ switch ($method) {
         $instance = new ItemController(); 
         $result = $instance->insert($_POST); 
         break; 
- 
+        case "updateItem":     
+    
+            $instance = new ItemController(); 
+            $result = $instance->update($_POST); 
+            break; 
+        case "deleteItem":     
+       
+            $instance = new ItemController(); 
+            $result = $instance->delete($_POST); 
+            break; 
     default:
         $result = []; 
 

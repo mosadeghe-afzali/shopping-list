@@ -68,4 +68,56 @@ class Item extends Model
 
         return $output;
     }
+
+    public function update($input)
+    {
+        $output = [];
+        $current_date = date('Y-m-d H:i:s');
+
+        $stmt = $this->db->prepare("UPDATE `items` 
+        SET name=:name,price=:price,description=:description,updated_at=:updated_at WHERE id=:id");
+
+        $stmt->bindParam('id', $input['id']);
+        $stmt->bindParam('name', $input['name']);
+        $stmt->bindParam('price', $input['price']);
+        $stmt->bindParam('description', $input['description']);
+        $stmt->bindParam('updated_at', $current_date);
+
+        $run = $stmt->execute();
+
+        if (!$run) {
+            $output['status'] = "error";
+            $output['message'] = "پردازش اطلاعات با شکست روبرو شد.";
+            return $output;
+        }
+
+        $output['status'] = "success";
+        $output['message'] = "با موفقیت انجام شد.";
+        $output['response'] = $this->db->lastInsertId();
+
+        return $output;
+    }
+
+    public function delete($id)
+    {
+        $output = [];
+  
+        $stmt = $this->db->prepare("DELETE FROM `items` WHERE  id = :id");
+
+        $stmt->bindParam('id', $id);
+
+        $run = $stmt->execute();
+
+        if (!$run) {
+            $output['status'] = "error";
+            $output['message'] = "پردازش اطلاعات با شکست روبرو شد.";
+            return $output;
+        }
+
+        $output['status'] = "success";
+        $output['message'] = "با موفقیت انجام شد.";
+        $output['response'] = $this->db->lastInsertId();
+
+        return $output;
+    }
 }
