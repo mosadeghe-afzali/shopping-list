@@ -15,21 +15,18 @@ function getItems() {
                 $.each(response.response, function (key, value) {
                     console.log(key, value)
                     card.append(
-                        "<div class='flex w-full items-center mb-10'>" 
-                        
+                        "<div class=' flex flex-col sm:grid sm:grid-cols-[10%_90%] gap 4 border border-gray-300 rounded-lg overflow-hidden mb-10 shadow-sm'>" 
                             +
-                                "<div class='basis-[40%] '>" 
-                                + "<div class='bg-green-400'>" +
-                                    "<input type='checkbox' name='items[]' data-id = "+ value.id + " value=" + value.id + ">"
-                                + "</div>"
+                                "<div class='flex items-center justify-center bg-green-200 p-4'>" 
+                                + "<input class='w-5 h-5' type='checkbox' name='items[]' data-id = "+ value.id + " value=" + value.id + ">"
                             + "</div>"
-                            + "<div class='basis-[60%] bg-green-200 '>" 
-                                + "<div class='mb-5'>"
-                                    +"<div>" + value.name + "</div>"
-                                    +"<div>" + value.price + "</div>"
-                                    +"<div>" + value.description + "</div>"
+                            + "<div class='flex flex-col justify-center bg-green-100 p-4 pr-6'>" 
+                                + "<div class='mb-4 space-y-1'>"
+                                    +"<div class='text-base font-semibold'>" + value.name + "</div>"
+                                    +"<div class='text-sm text-gray-700'>" + value.price + "<span> تومان</span></div>"
+                                    +"<div class='text-sm text-gray-600'>" + value.description + "</div>"
                                 + "</div>"
-                                + "<div class='flex space-x-2'>"
+                                + "<div class='flex gap-2'>"
                                     + '<a  data-id=' + value.id  
                                     + ' data-name =  "'+ value.name+'" '
                                     + ' data-price = "'+value.price+'" '
@@ -201,6 +198,7 @@ function updateItem() {
                 $('#name').val("");
                 $('#price').val("");
                 $('#description').val("");
+                $('#id').val("");
                 location.reload();
 
             }, 2000);
