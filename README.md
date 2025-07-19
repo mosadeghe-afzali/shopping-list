@@ -18,7 +18,7 @@ Install the dependencies
   npm run build
   ```
 
-``` project url in browser
+Project url in browser
 
   http://localhost/shopping-list/public/
-```
+
