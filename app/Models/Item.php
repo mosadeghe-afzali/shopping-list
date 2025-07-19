@@ -1,9 +1,6 @@
 <?php
 namespace App\Models;
 require_once __DIR__ . "/Model.php";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 
 class Item extends Model
 {

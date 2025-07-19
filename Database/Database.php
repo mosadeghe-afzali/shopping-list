@@ -1,7 +1,8 @@
 <?php
-namespace App\Config;
+namespace Database;
 
-use Exception;
+require __DIR__ . '/./config.php'; 
+
 use PDO;
 use PDOException;
 
@@ -9,10 +10,10 @@ class Database
 {
     private static $instance;
     private $connection;
-    private $dbhost = "localhost"; 
-    private $dbname = "shopping"; 
-    private $username = "root"; 
-    private $password = "12345678"; 
+    private $dbhost = DB_HOST; 
+    private $dbname = DB_NAME; 
+    private $username = DB_USERNAME; 
+    private $password = DB_PASSWORD; 
 
     private function __construct() {
         try {

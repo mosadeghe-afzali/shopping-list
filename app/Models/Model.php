@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
-require_once __DIR__ . "/../Config/Database.php";
-use App\Config\Database;
+require_once __DIR__ . "/../../Database/Database.php";
+use Database\Database;
 
 class Model
 {
