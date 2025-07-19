@@ -3,6 +3,10 @@ $(document).ready(function () {
 });
 
 function getItems() {
+    $('#name').val("");
+    $('#price').val("");
+    $('#description').val("");
+    $('#id').val("");
     $.ajax({
         url: "../routes/index.php?method=items",
         type: "GET",
@@ -69,7 +73,10 @@ function closeItemPopup() {
 
     $("#insert-item").addClass("hidden");
     $("#insert-item").removeClass("flex");
-
+    $('#name').val("");
+    $('#price').val("");
+    $('#description').val("");
+    $('#id').val("");
 }
 
 function hiddenItemPopup(event) {
@@ -127,7 +134,6 @@ function insertItem() {
     var name = $('#name').val();
     var price = $('#price').val();
     var description = $('#description').val();
-
 
     $.ajax({
         url: "../routes/index.php?method=insertItem",
@@ -191,6 +197,7 @@ function updateItem() {
     var price = $('#price').val();
     var description = $('#description').val();
     var id = $('#id').val(); 
+    $('#id').val(""); 
 
     $.ajax({
         url: "../routes/index.php?method=updateItem",
