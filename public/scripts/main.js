@@ -258,23 +258,55 @@ function deleteItem(e) {
          },
          success: function (response) {
              console.log(response); 
+            $('#message_form_delete').html(response.message)
              setTimeout(function () {
+                $('#message_form_delete').html("")
                  location.reload();
  
-             }, 800);
+             }, 1000);
              
          },
          error: function (error) {
+            $('#message_form_delete').html(response.message)
              console.log(error, 'err')
          }
      });
  }
+
+function showDeleteopup() {
+    $("#delete-item").removeClass("hidden");
+    $("#delete-item").addClass("flex");
+}
+
+function closeConfirmDeletePopup() {
+    $("#delete-item").addClass("hidden");
+    $("#delete-item").removeClass("flex");
+}
+
+function hiddenConfirmDeletePopup(event) {
+    if (event.target == $('#delete-item')) {
+
+        $("#delete-item").addClass("hidden");
+        $("#delete-item").removeClass("flex");
+    }
+}
+
+function submitDeleteItem() {
+    console.log('innn')
+    console.log(selectedItems = $('input[name="items[]"]:checked').length)
+    if($('input[name="items[]"]:checked').length == 0) {
+           $('#message_form_delete').html('موردی انتخاب نشده است.')
+             setTimeout(function () {
+                $('#message_form_delete').html("")
+                 location.reload();
  
- function deleteItems() {
+             }, 1000);
+        return; 
+    }
+
     var selectedItems = $('input[name="items[]"]:checked').map(function() {
        deleteItem(this)
     }).get()
-
 }
 
 function checkEmpty(item) {
