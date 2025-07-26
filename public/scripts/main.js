@@ -140,7 +140,6 @@ function insertItem() {
         type: "POST",
         dataType: 'json',
         data: { 
-            "_token": "{{ csrf_token() }}",
             name: name,
             price: price,
             description: description
@@ -204,7 +203,6 @@ function updateItem() {
         type: "POST",
         dataType: 'json',
         data: { 
-            "_token": "{{ csrf_token() }}",
             id: id,
             name: name,
             price: price,
@@ -253,7 +251,6 @@ function deleteItem(e) {
          type: "POST",
          dataType: 'json',
          data: { 
-             "_token": "{{ csrf_token() }}",
              item_id: id,
          },
          success: function (response) {
@@ -323,3 +320,136 @@ function checkNumeric(item) {
     }
     return false
 }
+
+function login(e) {
+
+    var  username = $('#username').val(); 
+    var password = $('#password').val(); 
+
+    if (checkEmpty(username)) {
+        $('#login_button').prop('disabled', false);
+        $('#message_form_login').html("نام کاربری را وارد کنید.");
+        return true;
+    }
+    if (checkEmpty(password)) {
+        $('#login_button').prop('disabled', false);
+        $('#message_form_login').html("کلمع عبور را وارد کنید.");
+        return true;
+    }
+
+    $.ajax({
+         url: "../routes/index.php?method=login",
+         type: "POST",
+         dataType: 'json',
+         data: { 
+             username: username,
+             password: password
+         },
+         success: function (response) {
+            
+            $('#message_form_login').html(response.message)
+            if(response.status == 'success') {
+                setTimeout(function () {
+                $('#message_form_login').html("")
+                window.location = "../public";
+ 
+             }, 1000);
+            }
+         
+         },
+         error: function (error) {
+            $('#message_form_login').html(response.message)
+             console.log(error, 'err')
+         }
+    });
+ }
+
+function signup(e) {
+    console.log('innnnnnnnnn')
+    var  name = $('#name').val(); 
+    var  username = $('#username').val(); 
+    var  password = $('#password').val(); 
+    var  password_repeat = $('#password-repeat').val(); 
+    $('#signup_button').prop('disabled', true);
+
+
+    if (checkEmpty(username)) {
+        $('#signup_button').prop('disabled', false);
+        $('#message_form_signup').html("نام را وارد کنید.");
+        return true;
+    }
+
+    if (checkEmpty(username)) {
+        $('#signup_button').prop('disabled', false);
+        $('#message_form_signup').html("نام کاربری را وارد کنید.");
+        return true;
+    }
+    if (checkEmpty(password)) {
+        $('#signup_button').prop('disabled', false);
+        $('#message_form_signup').html("کلمع عبور را وارد کنید.");
+        return true;
+    }
+
+    if(password != password_repeat) {
+        $('#signup_button').prop('disabled', false);
+        $('#message_form_signup').html("کلمه عبور با تکرار آن مطابقت ندارد.");
+        return true;
+    }
+    $.ajax({
+         url: "../routes/index.php?method=register",
+         type: "POST",
+         dataType: 'json',
+         data: { 
+             username: username,
+             password: password,
+             name: name,
+             password_repeat: password_repeat
+         },
+         success: function (response) {
+  
+            if(response.status == 'errro') {
+                $('#message_form_signup').html(response.message)
+                $('#signup_button').prop('disabled', false);
+
+            }
+
+            setTimeout(function () {
+                $('#message_form_signup').html("")
+                window.location = "../public";
+                $('#signup_button').prop('disabled', false);
+             }, 1000);
+         
+         },
+         error: function (error) {
+            $('#message_form_signup').html(response.message)
+            $('#signup_button').prop('disabled', false);
+
+             console.log(error, 'err')
+         }
+    });
+ }
+
+ function logout() {
+      $.ajax({
+         url: "../routes/index.php?method=logout",
+         type: "POST",
+         dataType: 'json',
+         success: function (response) {
+            
+            if(response.status == 'success') {
+                setTimeout(function () {
+                location.reload();
+ 
+             }, 1000);
+            }
+         
+         },
+         error: function (error) {
+            $('#message_form_login').html(response.message)
+             console.log(error, 'err')
+         }
+    });
+ }
+
+
+
